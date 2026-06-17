@@ -1,0 +1,204 @@
+import { motion } from 'framer-motion'
+import { TypeAnimation } from 'react-type-animation'
+import { FaGraduationCap, FaTrophy, FaCode } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import './Home.css'
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
+  }),
+}
+
+const EDUCATION = [
+  {
+    icon: <FaGraduationCap />,
+    period: '2025 — Present',
+    title: 'M.Tech, Computers & Instrumentation (C&I)',
+    place: 'Indian Institute of Technology (IIT) Bhilai',
+    detail: 'Pursuing postgraduate studies after qualifying GATE CS.',
+  },
+  {
+    icon: <FaTrophy />,
+    period: '2025 & 2026',
+    title: 'GATE Computer Science — Qualified',
+    place: 'Graduate Aptitude Test in Engineering',
+    detail: 'Cleared GATE CS in two consecutive attempts, 2025 and 2026.',
+  },
+  {
+    icon: <FaCode />,
+    period: 'B.Tech',
+    title: 'Bachelor of Technology',
+    place: 'BBIT Kolkata',
+    detail: 'Graduated with a CGPA of 8.08.',
+  },
+]
+
+const STACK = [
+  'HTML', 'CSS', 'JavaScript', 'React.js', 'GSAP', 'Framer Motion',
+  'Python', 'FastAPI', 'Flask', 'MongoDB',
+]
+
+export default function Home() {
+  return (
+    <div className="home">
+      {/* ---------- HERO ---------- */}
+      <section className="hero section">
+        <div className="container hero__inner">
+          <motion.p className="eyebrow" initial="hidden" animate="visible" variants={fadeUp}>
+            Available for opportunities
+          </motion.p>
+
+          <motion.h1
+            className="hero__title"
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={1}
+          >
+            Ujjal Manna
+          </motion.h1>
+
+          <motion.div
+            className="hero__role"
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={2}
+          >
+            <TypeAnimation
+              sequence={[
+                'M.Tech (C&I), IIT Bhilai', 1800,
+                'GATE CS Qualifier — 2025 & 2026', 1800,
+                'Software & Systems Enthusiast', 1800,
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              cursor={true}
+            />
+          </motion.div>
+
+          <motion.p
+            className="hero__desc"
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={3}
+          >
+            B.Tech graduate from BBIT Kolkata (CGPA 8.08), now pursuing M.Tech in
+            Computers &amp; Instrumentation at IIT Bhilai. I qualified GATE CS in
+            both 2025 and 2026, and now I help fellow engineers prepare for GATE
+            while sharing the technology news that matters.
+          </motion.p>
+
+          <motion.div
+            className="hero__actions"
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            custom={4}
+          >
+            <Link to="/gate" className="btn btn-primary">Explore GATE Guidance</Link>
+            <Link to="/contact" className="btn btn-outline">Get in Touch</Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ---------- EDUCATION / TIMELINE ---------- */}
+      <section className="section education">
+        <div className="container">
+          <motion.p
+            className="eyebrow"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Academic Journey
+          </motion.p>
+          <motion.h2
+            className="section-heading"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Education &amp; Milestones
+          </motion.h2>
+
+          <div className="timeline">
+            {EDUCATION.map((item, i) => (
+              <motion.div
+                className="timeline__item"
+                key={item.title}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <div className="timeline__icon">{item.icon}</div>
+                <div className="timeline__content card">
+                  <span className="tag">{item.period}</span>
+                  <h3>{item.title}</h3>
+                  <p className="timeline__place">{item.place}</p>
+                  <p className="timeline__detail">{item.detail}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- TECH STACK ---------- */}
+      <section className="section stack">
+        <div className="container">
+          <motion.p
+            className="eyebrow"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Toolkit
+          </motion.p>
+          <motion.h2
+            className="section-heading"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Technologies Behind This Site
+          </motion.h2>
+
+          <div className="stack__grid">
+            {STACK.map((tech, i) => (
+              <motion.div
+                className="stack__chip"
+                key={tech}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: i * 0.04 }}
+                whileHover={{ y: -4, borderColor: 'var(--accent-cyan)' }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- CTA STRIP ---------- */}
+      <section className="section cta-strip">
+        <div className="container cta-strip__inner card">
+          <div>
+            <h3>Preparing for GATE?</h3>
+            <p>Get a subject-wise breakdown, a realistic timeline, and resources I personally used.</p>
+          </div>
+          <Link to="/gate" className="btn btn-primary">View GATE Guidance</Link>
+        </div>
+      </section>
+    </div>
+  )
+}

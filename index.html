@@ -1,0 +1,111 @@
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { FaBookOpen } from 'react-icons/fa'
+import { getGateOverview } from '../api/client.js'
+import './Gate.css'
+
+export default function Gate() {
+  const [data, setData] = useState({ subjects: [], timeline: [], resources: [] })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getGateOverview()
+      .then((res) => setData(res.data))
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
+
+  return (
+    <div className="gate-page section">
+      <div className="container">
+        <p className="eyebrow">Mentorship</p>
+        <h1 className="section-heading">GATE CS Guidance</h1>
+        <p className="gate-page__sub">
+          I qualified GATE Computer Science in 2025 and 2026 and I'm now pursuing
+          M.Tech (C&amp;I) at IIT Bhilai. Here's the exact breakdown, timeline, and
+          resources I'd recommend to any aspirant.
+        </p>
+
+        {loading && <p className="gate-page__status">Loading guidance content…</p>}
+
+        {!loading && (
+          <>
+            {/* ---------- Subject weightage ---------- */}
+            <section className="gate-section">
+              <h2 className="gate-section__title">Subject-wise Weightage &amp; Tips</h2>
+              <div className="subject-grid">
+                {data.subjects.map((s, i) => (
+                  <motion.div
+                    className="card subject-card"
+                    key={s.subject}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.04 }}
+                  >
+                    <div className="subject-card__head">
+                      <h3>{s.subject}</h3>
+                      <span className="subject-card__weight">{s.weight}</span>
+                    </div>
+                    <p>{s.tip}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* ---------- Timeline ---------- */}
+            <section className="gate-section">
+              <h2 className="gate-section__title">Suggested Preparation Timeline</h2>
+              <div className="prep-timeline">
+                {data.timeline.map((t, i) => (
+                  <motion.div
+                    className="prep-timeline__item"
+                    key={t.phase}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                  >
+                    <div className="prep-timeline__marker">{i + 1}</div>
+                    <div className="card prep-timeline__card">
+                      <span className="tag tag--amber">{t.phase}</span>
+                      <h3>{t.title}</h3>
+                      <p>{t.details}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+
+            {/* ---------- Resources ---------- */}
+            <section className="gate-section">
+              <h2 className="gate-section__title">
+                <FaBookOpen style={{ marginRight: 10, color: 'var(--accent-cyan)' }} />
+                Recommended Resources
+              </h2>
+              <div className="resource-grid">
+                {data.resources.map((r, i) => (
+                  <motion.div
+                    className="card"
+                    key={r.type}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                  >
+                    <h3>{r.type}</h3>
+                    <ul className="resource-list">
+                      {r.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}

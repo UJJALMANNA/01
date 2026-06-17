@@ -1,0 +1,28 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar.jsx'
+import Footer from './components/Footer.jsx'
+import CircuitBackground from './components/CircuitBackground.jsx'
+import Home from './pages/Home.jsx'
+import News from './pages/News.jsx'
+import Gate from './pages/Gate.jsx'
+import Contact from './pages/Contact.jsx'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <CircuitBackground />
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/gate" element={<Gate />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  )
+}
+
+export default App

@@ -1,0 +1,60 @@
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import './CircuitBackground.css'
+
+/**
+ * Ambient, fixed full-page background: a faint circuit-trace grid with
+ * "pulse" dots that travel along the lines using native SVG animateMotion
+ * (reliable cross-browser, no extra GSAP plugin needed), plus a slow
+ * GSAP-driven opacity breathing effect on the whole grid for atmosphere.
+ */
+export default function CircuitBackground() {
+  const gridRef = useRef(null)
+
+  useEffect(() => {
+    const tween = gsap.to(gridRef.current, {
+      opacity: 0.6,
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    })
+    return () => tween.kill()
+  }, [])
+
+  return (
+    <div className="circuit-bg" aria-hidden="true">
+      <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+        <g ref={gridRef} className="circuit-lines" stroke="#00d9ff" strokeOpacity="0.09" strokeWidth="1.2" fill="none">
+          <path id="p1" d="M0,120 H300 V300 H700 V80 H1100 V250 H1440" />
+          <path id="p2" d="M0,500 H200 V650 H560 V450 H980 V700 H1440" />
+          <path id="p3" d="M100,0 V200 H450 V550 H100 V900" />
+          <path id="p4" d="M1300,0 V180 H1000 V480 H1300 V900" />
+        </g>
+        <g className="circuit-nodes" fill="#00d9ff" fillOpacity="0.18">
+          <circle cx="300" cy="120" r="3" />
+          <circle cx="700" cy="300" r="3" />
+          <circle cx="1100" cy="80" r="3" />
+          <circle cx="200" cy="500" r="3" />
+          <circle cx="560" cy="650" r="3" />
+          <circle cx="980" cy="450" r="3" />
+          <circle cx="450" cy="200" r="3" />
+          <circle cx="1000" cy="480" r="3" />
+        </g>
+
+        <circle r="3" fill="#00d9ff">
+          <animateMotion dur="7s" repeatCount="indefinite" path="M0,120 H300 V300 H700 V80 H1100 V250 H1440" />
+        </circle>
+        <circle r="3" fill="#ffb454">
+          <animateMotion dur="9s" repeatCount="indefinite" begin="1s" path="M0,500 H200 V650 H560 V450 H980 V700 H1440" />
+        </circle>
+        <circle r="2.5" fill="#00d9ff">
+          <animateMotion dur="8s" repeatCount="indefinite" begin="2s" path="M100,0 V200 H450 V550 H100 V900" />
+        </circle>
+        <circle r="2.5" fill="#ffb454">
+          <animateMotion dur="10s" repeatCount="indefinite" begin="0.5s" path="M1300,0 V180 H1000 V480 H1300 V900" />
+        </circle>
+      </svg>
+    </div>
+  )
+}

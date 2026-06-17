@@ -1,0 +1,2 @@
+# Copy to .env and point to your deployed backend URL
+VITE_API_BASE_URL=http://localhost:8000

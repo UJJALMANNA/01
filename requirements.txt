@@ -1,0 +1,122 @@
+.gate-page {
+  position: relative;
+  z-index: 1;
+  padding-top: 130px;
+}
+
+.gate-page__sub {
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin-top: 16px;
+}
+
+.gate-page__status {
+  color: var(--text-muted);
+  padding: 30px 0;
+}
+
+.gate-section {
+  margin-top: 64px;
+}
+
+.gate-section__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Subjects ---------- */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.subject-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.subject-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.subject-card__weight {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+  white-space: nowrap;
+}
+
+.subject-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* ---------- Prep timeline ---------- */
+.prep-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.prep-timeline__item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+}
+
+.prep-timeline__marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--accent-amber-dim);
+  color: var(--accent-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.prep-timeline__card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 10px 0 6px;
+}
+
+.prep-timeline__card p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+/* ---------- Resources ---------- */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.resource-grid h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+
+.resource-list li {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.resource-list li:last-child {
+  border-bottom: none;
+}
